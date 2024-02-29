@@ -1,0 +1,8 @@
+[build]
+target = "thumbv7em-none-eabihf"
+
+[target.thumbv7em-none-eabihf]
+runner = ["probe-rs", "run", "--probe", "0d28:0204", "--chip", "nRF52840_xxAA", "--log-format", "{t} [{L}] {s}"]
+
+[env]
+DEFMT_LOG = "info"
