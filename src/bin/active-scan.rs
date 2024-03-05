@@ -116,8 +116,13 @@ async fn main(_spawner: Spawner) {
                                 }
                             }
                         }
-                        Err(crc) => {
-                            defmt::error!("Invalid CRC {=u16:04x}", crc);
+                        Err(error) => {
+                            match error {
+                                radio::Error::CrcFailed(crc) => {
+                                    defmt::error!("Invalid CRC {=u16:04x}", crc);
+                                },
+                                _ => defmt::error!("Receive failed {}", error),
+                            }
                         }
                     }
                 }
